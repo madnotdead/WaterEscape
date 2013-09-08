@@ -1,3 +1,4 @@
+
 package  
 {
 	import org.flixel.FlxState;
@@ -8,7 +9,7 @@ package
 	 * ...
 	 * @author mad
 	 */
-	public class Playstate2 extends FlxState 
+	public class PlayState2 extends FlxState 
 	{
 		private var room:Room;
 		private var room2:Room;
@@ -18,7 +19,8 @@ package
 		private var conns:Vector.<Connector> = new Vector.<Connector>();
 		private var water:Number = 0;
 		private var text:FlxText;
-		public function Playstate2() 
+		
+		public function PlayState2() 
 		{     
 			//x,y,l,t,r,b,w
 			room = new Room(10, 10, 10, 10, 100, 100, 0,0);
@@ -70,14 +72,14 @@ package
 			
 			if (FlxG.keys.D)
 			{
-				for each (var itemTOclose:Connector in conns) 
+/*				for each (var itemTOclose:Connector in conns) 
 				{
 					itemTOclose.connectorOpened = false;
 					itemTOclose.color = 0xB40431;
-				}
+				}*/
 			}
 			
-			trace("room 2 - waterLevel: " + room2.getWaterLevel());
+			trace("room 1- waterLevel: " + room.getWaterLevel());
 		}		
 	}
 

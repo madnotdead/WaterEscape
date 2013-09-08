@@ -64,8 +64,8 @@
 			var maxUCWater:Number = this.width * this.height;
 			var waterLevel:Number = 0;
 			
-/*			if (_water < maxUCWater)
-				waterLevel = this._bottom - (this._water / this.width);
+/*			if (this._water < maxUCWater)
+				waterLevel = this._bottom - this._water / this.width;
 			else
 				waterLevel =  this.height;*/
 			
@@ -80,14 +80,16 @@
 		public function getPressureLevel():Number
 		{
 			var waterLevel:Number = this.getWaterLevel();
+			//var waterLevel:Number = this._water;
 			var pressureLevel:Number;
 			
-			if (waterLevel > this.height) 
+			if (waterLevel >= this._top) 
 				pressureLevel = waterLevel;
 			 else 
-				pressureLevel =  this._top - (K * this._water / (this.width * waterLevel));
+				pressureLevel =  this._top - K * this._water / (this.width * this.height);
 			
-			return this._pressure;
+				return pressureLevel;
+			//return this._pressure;
 		}
 		
 		public function addWater(quantity:Number):void
@@ -96,6 +98,7 @@
 				 this._water += quantity;
 
 		}
+		
 		
 		public function removeWater(quantity:Number):Number
 		{

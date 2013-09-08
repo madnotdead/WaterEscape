@@ -63,7 +63,7 @@ package
 		
 		override public function update():void 
 		{
-			if (type == HTYPE)
+			/*if (type == HTYPE)
 			{
 				if (connectorOpened)
 				{
@@ -91,44 +91,48 @@ package
 						}
 					}
 				}
-			}
-			
-			var cf1:Number = max(0, (this.bottom - this.lRoom.getWaterLevel() / this.height));
-			var cf2:Number = max(0, (this.bottom - this.rRoom.getWaterLevel() / this.height));
-			var cf:Number = min(1, max(cf1, cf2));
-			
-			var deltaP:Number = this.rRoom.getPressureLevel() - this.lRoom.getPressureLevel();
-			
-			
-			var flow:Number = deltaP * cf * this.perm * this.PERM_SCALE *  20;
-			
-			/*if (flow > 0)
-			{
-				flow *= -1;
-				flow  = this.lRoom.removeWater(flow);
-				this.rRoom.addWater(flow);
-				
-				while (flow != 0 && (this.lRoom.getPressureLevel() < this.rRoom.getPressureLevel()))
-				{
-					flow *= 0.5;
-					this.lRoom.removeWater(flow);
-					this.rRoom.addWater(flow);
-				}
-			}
-			else
-			{
-				flow *= -1;
-				flow = this.lRoom.removeWater(flow);
-				this.rRoom.addWater(flow);
-				
-				while (flow != 0 && (this.rRoom.getPressureLevel() < this.lRoom.getPressureLevel()))
-				{
-					flow *= 0.5;
-					this.rRoom.removeWater(flow);
-					this.lRoom.addWater(flow);
-				}
 			}*/
 			
+			if (type == HTYPE)
+			{
+				var cf1:Number = max(0, (this.bottom - this.lRoom.getWaterLevel() / this.height));
+				var cf2:Number = max(0, (this.bottom - this.rRoom.getWaterLevel() / this.height));
+				var cf:Number = min(1, max(cf1, cf2));
+				
+				var deltaP:Number = this.rRoom.getPressureLevel() - this.lRoom.getPressureLevel();
+				
+				
+				var flow:Number = deltaP * cf * this.perm * this.PERM_SCALE * 1;
+				
+				if (flow > 0)
+				{
+					//flow *= -1;
+					flow  = this.lRoom.removeWater(flow);
+					//flow *= -1;
+					this.rRoom.addWater(flow);
+					
+					while (flow != 0 && (this.lRoom.getPressureLevel() < this.rRoom.getPressureLevel()))
+					{
+						flow *= 0.5;
+						this.lRoom.removeWater(flow);
+						this.rRoom.addWater(flow);
+					}
+				}
+				else
+				{
+					flow *= -1;
+					flow = this.lRoom.removeWater(flow);
+					this.rRoom.addWater(flow);
+					
+					while (flow != 0 && (this.rRoom.getPressureLevel() < this.lRoom.getPressureLevel()))
+					{
+						flow *= 0.5;
+						this.rRoom.removeWater(flow);
+						this.lRoom.addWater(flow);
+					}
+				}
+			}
+			trace("flow: " + flow);
 			super.update();
 		}
 		
